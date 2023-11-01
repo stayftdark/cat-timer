@@ -8,7 +8,16 @@ body {
 h1{
     text-align: center;
 }
-.timer{
+#timer{
     font-size: 80px;
     text-align: center;
+}
+div.container{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#sailor-cat{
+    width: 250px;
 }
