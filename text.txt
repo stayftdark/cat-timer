@@ -1,0 +1,3 @@
+add pill button
+hovering effects
+dark/light mode?
