@@ -1,49 +1,64 @@
-const timer = document.querySelector('#timer')
-const title = document.querySelector('.#title')
-const startBtn = document.querySelector('#startBtn')
-const pauseBtn = document.querySelector('#pauseBtn')
-const restartBtn = document.querySelector('#resume')
-const resetBtn = document.querySelector("#resetBtn")
+document.addEventListener("DOMContentLoaded", function() {
+  // Variables
+  let timer;
+  let isRunning = false;
+  let intervals = [60 * 60, 15 * 60]; // Initial intervals in seconds (60 minutes, 15 minutes)
+  let currentIntervalIndex = 0;
 
-const WORK_TIME = 1 * 60;
-const BREAK_TIME = 0.5 * 60;
-let timerID = null;
-let oneRoundCompleted = false; //work+break
+  // Display initial time
+  updateTimeDisplay();
 
-//update title
-const updateTitle = (msg) => {
-    title.textContent = msg;
-}
-//function for countdown
-const countDown = (time) => {
-    return () => {
-        timer.textContent = time;
-        time--;
-        if(time < 0){
-            stopTimer();
-            if(!oneRoundCompleted == false){
-                timerID = startTimer(BREAK_TIME);
-                oneRoundCompleted = true;
-                updateTitle("Go!")
-            }
-        }
-    }
+  // Start button click event
+  document.getElementById('start').addEventListener('click', function() {
+      if (!isRunning) {
+          startTimer();
+      }
+  });
 
-}
-const startTimer = (startTime) => {
-    if(timerID !== null){
-        stopTimer();
-    }
-    return setInterval(countDown(startTime), 1000);
-    
-}
-//function to stop timer
-const stopTimer = () => {
-    clearInterval(timerID)
-    timerID = null;
-}
-//start button event listener
-startBtn.addEventListener('click', ()=>{
-    timerID = startTimer(WORK_TIME);
-    updateTitle("Go!");
+  // Pause button click event
+  document.getElementById('pause').addEventListener('click', function() {
+      if (isRunning) {
+          pauseTimer();
+      }
+  });
+
+  // Function to start the timer
+  function startTimer() {
+      isRunning = true;
+      timer = setInterval(function() {
+          if (intervals[currentIntervalIndex] > 0) {
+              intervals[currentIntervalIndex]--;
+              updateTimeDisplay();
+          } else {
+              clearInterval(timer);
+              isRunning = false;
+              switchInterval();
+              startTimer();
+          }
+      }, 1000); // Update every second
+  }
+
+  // Function to pause the timer
+  function pauseTimer() {
+      isRunning = false;
+      clearInterval(timer);
+  }
+
+  // Function to update the time display
+  function updateTimeDisplay() {
+      const minutes = Math.floor(intervals[currentIntervalIndex] / 60);
+      const seconds = intervals[currentIntervalIndex] % 60;
+      const formattedTime = `${padZero(minutes)}:${padZero(seconds)}`;
+      document.getElementById('timer').innerText = formattedTime;
+  }
+
+  // Function to switch to the next interval
+  function switchInterval() {
+      currentIntervalIndex = (currentIntervalIndex + 1) % intervals.length;
+  }
+
+  // Function to pad zero for single-digit numbers
+  function padZero(num) {
+      return num < 10 ? `0${num}` : num;
+  }
 });

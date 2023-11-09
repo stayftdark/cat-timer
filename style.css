@@ -13,52 +13,40 @@ body {
 h1{
     text-align: center;
 }
+#timer{
+    font-size: 80px;
+    text-align: center;
+}
 div.container{
     position: fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#pomodoro-pic{
+#sailor-cat{
     width: 250px;
 }
-#startBtn,
-#resumeBtn{
+#start{
    background-color: rgb(174, 181, 209);
 }
-#pauseBtn,
-#resetBtn{
+#pause{
     background-color: rgb(122,130,148);
 }
-#pauseBtn,
-#startBtn,
-#resumeBtn,
-#resetBtn{
+#pause,
+#start{
     border: none;
     color: black;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 4px 2px;
+    margin: 2px 2px;
     cursor: pointer;
     border-radius: 16px;
     font-family: "Rubber-Biscuit";
-    transition: transform 0.4s ease-in-out;
 
 }
 .buttons{
-    margin-left: -2em;
-    cursor: pointer;
-}
-div.timer{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    font-size: 80px;
-    text-align: center;
-    margin-left: .4em;
-}
-.buttons button:hover{
-    transform: scale(1.1);
+    margin: 1em;
+    margin-left: 3em;
 }
