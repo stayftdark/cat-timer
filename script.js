@@ -1,38 +1,49 @@
-//variables
-let workTitle = document.getElementById('start');
-let breakTitle = document.getElementById('pause');
+const timer = document.querySelector('#timer')
+const title = document.querySelector('.#title')
+const startBtn = document.querySelector('#startBtn')
+const pauseBtn = document.querySelector('#pauseBtn')
+const restartBtn = document.querySelector('#resume')
+const resetBtn = document.querySelector("#resetBtn")
 
-let workTime = 60;
-let breakTime = 15;
+const WORK_TIME = 1 * 60;
+const BREAK_TIME = 0.5 * 60;
+let timerID = null;
+let oneRoundCompleted = false; //work+break
 
-let seconds = "00"
-
-//display
-window.onload = () => {
-    document.getElementById('minutes').innerHTML = workTime;
-    document.getElementById('seconds').innerHTML = seconds;
-
-    workTitle.classList.add('active');
+//update title
+const updateTitle = (msg) => {
+    title.textContent = msg;
 }
-
-//start timer
-function start(){
-    //changing time
-    seconds = 59;
-
-    let workMinutes = workTime - 1;
-    let breakMinutes = breakTime - 1;
-
-    breakCount = 0;
-
-    //countdown
-    let timerFunction = () => {
-    //show on display
-    document.getElementById('minutes').innerHTML = workMinutes;
-    document.getElementById('seconds').innerHTML = seconds;
-
-    seconds = seconds - 1;
+//function for countdown
+const countDown = (time) => {
+    return () => {
+        timer.textContent = time;
+        time--;
+        if(time < 0){
+            stopTimer();
+            if(!oneRoundCompleted == false){
+                timerID = startTimer(BREAK_TIME);
+                oneRoundCompleted = true;
+                updateTitle("Go!")
+            }
+        }
     }
+
 }
-//start count down
-setInterval(timerFunction, 1000); //AKA 1second
+const startTimer = (startTime) => {
+    if(timerID !== null){
+        stopTimer();
+    }
+    return setInterval(countDown(startTime), 1000);
+    
+}
+//function to stop timer
+const stopTimer = () => {
+    clearInterval(timerID)
+    timerID = null;
+}
+//start button event listener
+startBtn.addEventListener('click', ()=>{
+    timerID = startTimer(WORK_TIME);
+    updateTitle("Go!");
+});

@@ -22,14 +22,18 @@ div.container{
 #pomodoro-pic{
     width: 250px;
 }
-#start{
+#startBtn,
+#resumeBtn{
    background-color: rgb(174, 181, 209);
 }
-#pause{
+#pauseBtn,
+#resetBtn{
     background-color: rgb(122,130,148);
 }
-#pause,
-#start{
+#pauseBtn,
+#startBtn,
+#resumeBtn,
+#resetBtn{
     border: none;
     color: black;
     padding: 10px 20px;
@@ -40,10 +44,11 @@ div.container{
     cursor: pointer;
     border-radius: 16px;
     font-family: "Rubber-Biscuit";
+    transition: transform 0.4s ease-in-out;
 
 }
 .buttons{
-    margin-left: 3em;
+    margin-left: -2em;
     cursor: pointer;
 }
 div.timer{
@@ -53,4 +58,7 @@ div.timer{
     font-size: 80px;
     text-align: center;
     margin-left: .4em;
+}
+.buttons button:hover{
+    transform: scale(1.1);
 }
