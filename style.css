@@ -24,7 +24,8 @@ div.container{
     transform: translate(-50%, -50%);
 }
 #sailor-cat{
-    width: 250px;
+    width: 200px;
+    margin-left: 1em;
 }
 #start{
    background-color: rgb(174, 181, 209);
@@ -50,8 +51,9 @@ div.container{
 }
 .buttons{
     margin: 1em;
-    margin-left: 3em;
+    margin-left: 1em;
 }
 .buttons button:hover{
     transform: scale(1.1);
 }
+
