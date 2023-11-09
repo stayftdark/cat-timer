@@ -44,9 +44,14 @@ div.container{
     cursor: pointer;
     border-radius: 16px;
     font-family: "Rubber-Biscuit";
+    transition: transform 0.4s ease-in-out;
+
 
 }
 .buttons{
     margin: 1em;
     margin-left: 3em;
+}
+.buttons button:hover{
+    transform: scale(1.1);
 }
